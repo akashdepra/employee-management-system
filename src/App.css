@@ -1,0 +1,165 @@
+.App {
+  text-align: center;
+  padding: 10px;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.main-login {
+  padding: 50px;
+  border: 1px solid #ccc;
+}
+
+.login-button {
+  margin-top: 10px;
+}
+
+.app-login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.main-header {
+  width: 100%;
+  height: 25px;
+  border: 1px solid #ccc;
+  margin-top: 5px;
+}
+
+.emp-list {
+  padding: 10px;
+}
+
+.ems-title {
+  float: left;
+  padding-left: 10px;
+}
+
+.welcome-title {
+  float: right;
+  padding-right: 10px;
+}
+
+.server-side-search {
+  padding: 5px;
+  margin: auto;
+  width: 50%;
+}
+
+.local-search {
+  margin: auto;
+  width: 50%;
+}
+
+.local-search-input {
+  width: 250px;
+}
+
+.server-side-search-input {
+  width: 190px;
+}
+
+.search-button {
+  background-color: transparent;
+  width: 60px;
+}
+
+.user-list table {
+  width: 100%;
+}
+
+.user-list table,
+.user-list td,
+.user-list th,
+.user-list tr {
+  border: 1px solid;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 5px;
+  text-align: left;
+}
+
+.user-list {
+  width: 50%;
+  margin: auto;
+  margin-top: 20px;
+}
+
+.user-details-link {
+  color: #555;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.user-data {
+  text-align: left;
+}
+
+.search-elements {
+  margin-top: 20px;
+}
+
+.user-info {
+  display: grid;
+  width: 400px;
+  margin: auto;
+  margin-top: 20px;
+  border: 1px solid;
+  padding: 10px;
+  grid-row-gap: 10px;
+}
+
+.user-info div label {
+  float: left;
+}
+
+.go-back-btton {
+  margin-top: 20px;
+}
+
+.user-field {
+  width: 100%;
+}
+
+.user-field label {
+  width: 40%;
+  text-align: left;
+}
