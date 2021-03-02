@@ -2,7 +2,7 @@
  * Employee List with search components
  */
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, connect } from 'react-redux';
 import Header from './components/Header.jsx';
 import ServerSideSearchComponent from './components/ServerSideSearchComponent.jsx';
 import LocalSearchComponent from './components/LocalSearchComponent.jsx';
@@ -23,7 +23,7 @@ const EmployeeList = (props) => {
     let employeeData = useSelector(state => state.employeeData);
 
     //Create hook to store employee data
-    const [employeeDataState, setEmployeeData] = useState(employeeData);
+    let [employeeDataState, setEmployeeData] = useState(employeeData);
 
     //Redirec to login page if username does not exists
     if (!userData.username) {
@@ -53,10 +53,9 @@ const EmployeeList = (props) => {
     }
 
     //Function to filter the data based on search value
-    let filterData = (searchValue) => {
-        let filteredData = employeeData;
+    let filterData = (searchValue, filteredData = employeeData) => {
         if (searchValue) {
-            filteredData = employeeData.filter(user =>{
+            filteredData = filteredData.filter(user =>{
                 console.log('user', user);
                 return ( user.first_name.toLowerCase().includes(searchValue.toLowerCase()) || user.last_name.toLowerCase().includes(searchValue.toLowerCase()) )
             });
@@ -67,13 +66,18 @@ const EmployeeList = (props) => {
     //Function to get data from server based on search value
     //Fallback for local search in catch
     let getDataFromServer = () => {
-        axios.get(`/userData?search=${searchData.serverSide}`)
-            .then(function (response) {
-                // handle success
-                setEmployeeData(response.data);
+        axios.get(`http://localhost:8000/EmployeeList/get?search=${searchData.serverSide}&token=${userData.token}`)
+            .then((response) => {
+                let user_data = response.data.user_data;
+                props.setEmptData(user_data);
+                if (searchData.local) {
+                    user_data = filterData(searchData.local, user_data);
+                }
+                setEmployeeData(user_data);
             })
-            .catch(function (error) {
-                setEmployeeData(filterData(searchData.serverSide));
+            .catch((error) => {
+                console.log('error caught', error);
+                // setEmployeeData(filterData(searchData.serverSide));
             });
     }
 
@@ -117,4 +121,12 @@ const EmployeeList = (props) => {
         );
 }
 
-export default EmployeeList;
+function mapDispatchToProps(dispatch) {
+	return {
+		setEmptData(data) {
+			dispatch({ type: 'SETEMPTDATA', data })
+		}
+	}
+}
+
+export default connect("", mapDispatchToProps)(EmployeeList)
